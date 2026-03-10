@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0e;
+            --bg-secondary: #12121a;
+            --text-primary: #f8f9fa;
+            --text-secondary: #a0a0b0;
+            --accent-primary: #6366f1;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --danger: #ef4444;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Login Form styles */
+        #login-section {
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: var(--bg-primary);
+            color: white;
+            font-family: inherit;
+            margin-top: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: none;
+            background: var(--accent-primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: var(--danger);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Dashboard Styles */
+        #dashboard-section {
+            display: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            width: auto;
+            padding: 0.5rem 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Login Section -->
+    <div class="container" id="login-section">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div id="login-error" class="error"></div>
+        </form>
+    </div>
+
+    <!-- 2. Dashboard Section -->
+    <div class="container" id="dashboard-section">
+        <div class="header">
+            <h2>Inbox (Contact Submissions)</h2>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+
+        <div id="contacts-container">
+            <div class="loading">Loading contacts...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        const loginSection = document.getElementById('login-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('login-error');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const contactsContainer = document.getElementById('contacts-container');
+
+        // Check auth on load
+        function checkAuth() {
+            const token = localStorage.getItem('adminToken');
+            if (token) {
+                showDashboard();
+            } else {
+                loginSection.style.display = 'block';
+                dashboardSection.style.display = 'none';
+            }
+        }
+
+        // Handle Login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            loginError.textContent = '';
+
+            try {
+                const res = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('adminToken', data.token);
+                    loginForm.reset();
+                    showDashboard();
+                } else {
+                    loginError.textContent = data.error;
+                }
+            } catch (err) {
+                loginError.textContent = 'Network error. Backend might be down.';
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            checkAuth();
+        });
+
+        // Fetch and display dashboard
+        async function showDashboard() {
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'block';
+            contactsContainer.innerHTML = '<div class="loading">Loading messages...</div>';
+
+            const token = localStorage.getItem('adminToken');
+
+            try {
+                const res = await fetch(`${API_URL}/admin/contacts`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.status === 401 || res.status === 400) {
+                    // Token expired or invalid
+                    localStorage.removeItem('adminToken');
+                    checkAuth();
+                    return;
+                }
+
+                const contacts = await res.json();
+                renderContacts(contacts);
+            } catch (err) {
+                contactsContainer.innerHTML = `<div class="error">Failed to load: ${err.message}</div>`;
+            }
+        }
+
+        function renderContacts(contacts) {
+            if (!contacts || contacts.length === 0) {
+                contactsContainer.innerHTML = '<div class="loading">No messages found.</div>';
+                return;
+            }
+
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            contacts.forEach(c => {
+                const date = new Date(c.created_at).toLocaleDateString();
+                html += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${c.name}</td>
+                        <td>${c.email}</td>
+                        <td>${c.message}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            contactsContainer.innerHTML = html;
+        }
+
+        // Init
+        checkAuth();
+    </script>
+</body>
+
+</html>

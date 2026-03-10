@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Abhishek Awasthi - Cutting-Edge Web Developer Portfolio showcasing modern, responsive, and high-performance digital solutions." />
+    <title>Abhishek Awasthi | Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/animations.css">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="glass-nav">
+        <div class="nav-container">
+            <a href="#home" class="logo-wrapper">
+                <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="logo-icon">
+                    <path d="M50 10L15 85H35L50 50L65 85H85L50 10Z" fill="url(#brandGrad)" />
+                    <path d="M38 68H62L58 60H42L38 68Z" fill="url(#brandGrad)" />
+                    <defs>
+                        <linearGradient id="brandGrad" x1="15" y1="10" x2="85" y2="85" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#6366f1" />
+                            <stop offset="0.5" stop-color="#8b5cf6" />
+                            <stop offset="1" stop-color="#ec4899" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Abhishek<span class="gradient-text">.</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#about" class="nav-item">About</a>
+                <a href="#projects" class="nav-item">Work</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </div>
+
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-outline-sm">Hire Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section modern-hero">
+            <div class="glow-orb orb-1"></div>
+            <div class="glow-orb orb-2"></div>
+
+            <div class="container hero-content-split">
+                <div class="hero-text-content">
+                    <div class="availability-badge animate-fade-in-up" style="animation-delay: 0.1s">
+                        <span class="status-dot"></span> Available for new projects
+                    </div>
+
+                    <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.2s">
+                        Building <span class="gradient-text animated-gradient">Digital</span><br />Excellence.
+                    </h1>
+
+                    <p class="hero-description animate-fade-in-up" style="animation-delay: 0.3s">
+                        Hi, I'm <span class="highlight text-white">Abhishek Awasthi</span>. I engineer high-performance
+                        web applications that merge stunning aesthetics with powerful functionality.
+                    </p>
+
+                    <div class="tech-stack-pills animate-fade-in-up" style="animation-delay: 0.35s">
+                        <span class="tech-pill">TypeScript</span>
+                        <span class="tech-pill">React</span>
+                        <span class="tech-pill">Node.js</span>
+                    </div>
+
+                    <div class="hero-actions animate-fade-in-up" style="animation-delay: 0.4s">
+                        <a href="#projects" class="btn btn-primary glowing-btn">
+                            Explore Work
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="margin-left: 8px; vertical-align: middle;">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual animate-fade-in-up" style="animation-delay: 0.5s">
+                    <div class="floating-code-card">
+                        <div class="card-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="card-title">developer.js</span>
+                        </div>
+                        <div class="card-body">
+                            <pre><code><span class="keyword">const</span> <span class="variable">developer</span> = {
+  <span class="property">name</span>: <span class="string">'Abhishek Awasthi'</span>,
+  <span class="property">role</span>: <span class="string">'Full Stack Engineer'</span>,
+  <span class="property">skills</span>: [<span class="string">'UI/UX'</span>, <span class="string">'Performance'</span>],
+  <span class="method">build</span>() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.skills.map(<span class="argument">feature</span> => 
+      <span class="string">`Mastering ${feature}`</span>
+    );
+  }
+};
+
+<span class="variable">developer</span>.<span class="method">build</span>();</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator animate-fade-in-up" style="animation-delay: 0.8s">
+                <div class="mouse"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">Technical <span class="gradient-text">Expertise</span></h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>With a passion for cutting-edge technologies and pixel-perfect design, I specialize in
+                            creating scalable and dynamic digital experiences. From intricate architectures to modern,
+                            responsive interfaces, I deliver solutions that stand out.</p>
+                    </div>
+                    <div id="skills-container" class="skills-container">
+                        <!-- Dynamically populated skills -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2 class="section-title">Selected <span class="gradient-text">Works</span></h2>
+                <div id="projects-grid" class="projects-grid">
+                    <!-- Dynamically populated projects -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section modern-contact">
+            <div class="glow-orb orb-3"></div>
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info animate-fade-in-up">
+                        <h2 class="section-title text-left">Let's <span
+                                class="gradient-text animated-gradient">Collaborate</span></h2>
+                        <p class="mb-4 contact-desc">Ready to build something extraordinary? Drop a message, connect on
+                            LinkedIn, or chat with my AI assistant instantly. Let's engineer your vision into reality.
+                        </p>
+
+                        <div class="contact-cards">
+                            <a href="mailto:abhishekawasthi657@gmail.com" class="contact-card">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Email Me</h4>
+                                    <span>abhishekawasthi657@gmail.com</span>
+                                </div>
+                            </a>
+                            <a href="https://www.linkedin.com/in/abhishek-awasthi-92191939a" target="_blank"
+                                class="contact-card">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                        stroke-width="2" fill="none">
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                        </path>
+                                        <rect x="2" y="9" width="4" height="12"></rect>
+                                        <circle cx="4" cy="4" r="2"></circle>
+                                    </svg>
+                                </div>
+                                <div class="card-content">
+                                    <h4>LinkedIn</h4>
+                                    <span>Connect with me</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper animate-fade-in-up" style="animation-delay: 0.2s">
+                        <form id="contactForm" class="contact-form glass-form">
+                            <div class="form-header">
+                                <h3>Send a Message</h3>
+                                <span class="pulse-status"><span class="status-dot"></span> Replies within 24h</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Project Details" rows="4"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary glowing-btn w-100" id="submitBtn">
+                                <span class="btn-text">Send Message</span>
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" style="margin-left: 8px">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                            <div id="form-status" class="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Assistant Widget Container -->
+    <div id="ai-assistant-wrapper"></div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/ai-assistant.js"></script>
+</body>
+
+</html>
