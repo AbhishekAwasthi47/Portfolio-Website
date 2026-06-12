@@ -3,7 +3,7 @@
 Personal portfolio website showcasing my frontend development projects and skills.
 
 ## Tech Stack
-- React.js
+- TypeScript
 - JavaScript
 - CSS
 
